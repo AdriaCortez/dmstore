@@ -1,0 +1,1 @@
+//aqui vai ficar o arquio de configurações glovbais relacionadas a dotenv, cors, e relacionados

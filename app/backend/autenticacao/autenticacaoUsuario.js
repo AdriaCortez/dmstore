@@ -1,0 +1,1 @@
+//tudo relacionado a autenticação e criptografia

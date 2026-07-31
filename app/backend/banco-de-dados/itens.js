@@ -1,0 +1,1 @@
+//base de dados de itens da loja
