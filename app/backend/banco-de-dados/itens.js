@@ -25,7 +25,25 @@ const itemSchema = new mongoose.Schema({
     vendidos: {
         type: Number,
         default: 0
-    }
+    },
+
+    criadoEm: {
+        type: Date,
+        default: Date.now
+    },
+
+    criadoPor: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+        required: true
+    },
+
+    tipo: [{
+        type: String,
+        required: true,
+        minLength: 3,
+        maxLength: 40
+    }]
 
 });
 

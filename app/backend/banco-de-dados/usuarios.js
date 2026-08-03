@@ -30,6 +30,11 @@ const userSchema = new mongoose.Schema({
         }
     },
 
+    admin: {
+        type: Boolean,
+        default: false
+    }
+
 });
 
 export const Usuario = mongoose.model("User", userSchema);
