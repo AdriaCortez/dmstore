@@ -1,4 +1,5 @@
 import { Item } from "../banco-de-dados/itens";
+import { Imagem } from "../banco-de-dados/imagens";
 import mongoose from "mongoose";
 
 export async function criarItem(req, res) {
@@ -67,6 +68,51 @@ try {
     });
 
 }}
+
+export async function adicionarImagemAoItem(req, res) {
+    try {
+        const imagemURL = `http://localhost:4000/uploads/${req.file.path}`; // URL da imagem salva no servidor
+
+        const item = await Item.findByIdAndUpdate(
+            req.itemId,
+            { imagens: imagemURL },
+            { new: true }
+        );
+        
+        if (!item) {
+            return res.status(404).json({
+                error: "Item não encontrado!"
+            });
+        }
+
+        if(!req.file) {
+            return res.status(400).json({
+                error: "Nenhuma imagem foi enviada!"
+            });
+        }
+
+        const imagem = await Imagem.create({
+            url: imagemURL,
+            item: req.itemId,
+            caminho: req.file.path
+        });
+
+        item.imagem = imagem._id;
+        await item.save();
+
+        return res.status(200).json({
+            message: "Imagem adicionada ao item com sucesso!",
+            item,
+            imagem
+        });
+    } catch (error) {
+        console.error("Erro ao adicionar imagem ao item:", error);
+        return res.status(500).json({
+            error: "Erro ao adicionar imagem ao item!"
+        });
+    }
+
+}
 
 export async function deletarItem(req, res) {
     try {
