@@ -105,6 +105,7 @@ export async function adicionarImagemAoItem(req, res) {
             item,
             imagem
         });
+        
     } catch (error) {
         console.error("Erro ao adicionar imagem ao item:", error);
         return res.status(500).json({
