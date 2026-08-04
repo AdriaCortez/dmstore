@@ -105,7 +105,7 @@ export async function adicionarImagemAoItem(req, res) {
             item,
             imagem
         });
-        
+
     } catch (error) {
         console.error("Erro ao adicionar imagem ao item:", error);
         return res.status(500).json({
@@ -147,3 +147,49 @@ export async function deletarItem(req, res) {
         });
     }
 }
+
+export async function editarItem(req, res) {
+    try {
+        const { id } = req.params;
+
+        const { nome, descricao, preco, vendidos, tipo } = req.body;
+
+        if(!mongoose.Types.ObjectId.isValid(id)) {
+            return res.status(400).json({ error: "ID Inválido" })
+        }
+
+        const item = await Item.findByIdAndUpdate(
+            id, 
+            {
+                nome, 
+                descricao,
+                preco,
+                vendidos,
+                tipo,
+            }, 
+            {
+                new: true
+
+            }
+        );
+
+        if(!item) {
+            return res.status(404).json({
+                error: "Item não encontrado"
+            });
+        }
+
+        return res.status(200).json({
+            message: "Item atualizado com sucesso"
+        });
+
+        } catch {
+            return res.status(500).json({
+                error: "Erro ao atualizar tarefa",
+                detalhe: error.message,
+                
+            })
+
+        }
+
+    }

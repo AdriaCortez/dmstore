@@ -22,7 +22,7 @@ export async function cadastrarUsuario(req, res) {
         })
 
         return res.status(201).json({
-            message: "Usuário cadastrado com sucesso!"
+            message: "Usuário cadastradoria um historico com sucesso!"
         });
 
     } catch (error) {
