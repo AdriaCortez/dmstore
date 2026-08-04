@@ -13,7 +13,8 @@ import {
 import {
     cadastrarItem,
     deletarItem,
-    adicionarImagemAoItem } from "./itens/crudItens.js";
+    adicionarImagemAoItem,
+    editarItem } from "./itens/crudItens.js";
 import ConfiguracoesGlobais from "./global.config.js";
 
 const app = express();
@@ -74,7 +75,13 @@ app.put("/mudar-senha", autenticado, async (req, res) => {
         return res.status(500).json({ error: "Erro interno do servidor" });
     } });
 
-
+app.put("/editar-items/:id", autenticado, async (req, res) => {
+    try {
+        return editarItem(req, res);
+    } catch {
+        return res.status(500).json({ error: "Erro interno no servidor"})
+    }
+});
 
 app.delete("/deletar-conta", autenticado, async (req, res) => {
     try {
