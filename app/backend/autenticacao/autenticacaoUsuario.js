@@ -59,7 +59,7 @@ export async function verificarLogin(req, res) {
 
         if(!senhaOk) {
             return res.status(401).json({
-                error: "Senha inválida!"
+                error: "Credencial inválida!"
             })
         }
 

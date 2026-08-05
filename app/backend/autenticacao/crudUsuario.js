@@ -25,7 +25,16 @@ export async function cadastrarUsuario(req, res) {
             message: "Usuário cadastradoria um historico com sucesso!"
         });
 
-    } catch (error) {
+    } catch (err) {
+
+        if(err.code === 11000) {
+            return res.status(409).json({ error: "Conta já cadastrada"})
+        }
+
+        if (err === 400 ) {
+            return res.status(400).json({ error: "BAD REQUEST - O servidor não entendeu a solicitação"})
+        }
+
         console.error("Erro ao cadastrar usuário:", error);
         return res.status(500).json({
             error: "Erro ao cadastrar usuário!"
