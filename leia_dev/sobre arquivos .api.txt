@@ -1,0 +1,6 @@
+Os arquivos .api são as chamadas de api que aplicam a lógica da aplicação. Nenhum CRUD funciona sem esses chamados de API.
+Eles são tipicamente em Typescript por possuírem funções que são aceitáveis somente em typescript, o que combina com o modelo de 
+desenvolvimento disponível no react router v7. Por isso TODOS os arquivos relacionados à front end são em .tsx ao invés de .jsx.
+
+Dentro desses arquivos você pode perceber que o front end é onde guardamos a interface de usuário visualizavel, enquanto o .api é responsável 
+por resguardar a lógica que faz os botões e campos de formulário funcionarem, através de react hooks do react original.
