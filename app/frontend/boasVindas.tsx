@@ -217,7 +217,7 @@ function Carousel() {
 
   return (
     <section aria-label="Destaques da loja" className="relative">
-      <div className="mb-8 flex items-end justify-between px-6 sm:px-12 md:px-16">
+      <div className="mb-8 flex items-end justify-between px-8 sm:px-12 md:px-16">
         <div>
           <span className="text-[11px] font-semibold uppercase tracking-[0.25em] text-[#C2A312]">
             Explorar
@@ -351,6 +351,10 @@ interface SideDrawerProps {
 }
 
 function SideDrawer({ open, onClose }: SideDrawerProps) {
+  const [openCatalogo, setOpenCatalogo] = useState(false);
+  const [openOraculos, setOpenOraculos] = useState(false);
+  const [openArtigos, setOpenArtigos] = useState(false);
+
   useEffect(() => {
     function handleKeyDown(event: KeyboardEvent) {
       if (event.key === "Escape") onClose();
@@ -365,9 +369,9 @@ function SideDrawer({ open, onClose }: SideDrawerProps) {
     };
   }, [open, onClose]);
 
-  const menuItems = [
-    { label: "Termos de serviço", to: "/termos", symbol: "✦" },
-    { label: "Políticas de privacidade", to: "/privacidade", symbol: "☾" },
+  const bottomMenuItems = [
+    { label: "Termos de serviço", to: "/termos", symbol: "⚖" },
+    { label: "Política de privacidade", to: "/privacidade", symbol: "🛡" },
   ];
 
   return (
@@ -390,9 +394,9 @@ function SideDrawer({ open, onClose }: SideDrawerProps) {
             animate={{ x: 0 }}
             exit={{ x: "-100%" }}
             transition={{ type: "spring", damping: 30, stiffness: 280 }}
-            className="fixed inset-y-0 left-0 z-50 flex w-full max-w-sm flex-col bg-[#FBFBFA] shadow-2xl"
+            className="fixed inset-y-0 left-0 z-50 flex w-full max-w-sm flex-col bg-[#FBFBFA] shadow-2xl overflow-y-auto no-scrollbar"
           >
-            <div className="flex items-center justify-between border-b border-[#EAE4F2] px-8 py-6">
+            <div className="flex items-center justify-between border-b border-[#EAE4F2] px-8 py-6 sticky top-0 bg-[#FBFBFA] z-10">
               <div>
                 <span className="text-[11px] font-semibold uppercase tracking-[0.25em] text-[#9B8EA6]">
                   Navegação
@@ -410,32 +414,207 @@ function SideDrawer({ open, onClose }: SideDrawerProps) {
             </div>
 
             <nav className="flex flex-col gap-1.5 px-4 py-8">
-              {menuItems.map((item, index) => (
-                <motion.div
-                  key={item.to}
-                  initial={{ opacity: 0, x: -16 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.1 + index * 0.06, duration: 0.4 }}
+              {/* Catálogo de Serviços com Acordeão */}
+              <div className="flex flex-col">
+                <button
+                  type="button"
+                  onClick={() => setOpenCatalogo(!openCatalogo)}
+                  className="group flex items-center justify-between rounded-2xl px-5 py-4 text-[#2D263B] transition-all duration-300 hover:bg-[#F3EFEA] w-full text-left"
                 >
-                  <Link
-                    to={item.to}
-                    onClick={onClose}
-                    className="group flex items-center justify-between rounded-2xl px-5 py-4 text-[#2D263B] transition-all duration-300 hover:bg-[#F3EFEA]"
-                  >
-                    <span className="flex items-center gap-4">
-                      <span className="text-lg text-[#9B8EA6] transition-transform duration-300 group-hover:translate-x-1">
-                        {item.symbol}
-                      </span>
-                      <span className="font-display text-lg">{item.label}</span>
+                  <span className="flex items-center gap-4">
+                    <span className="text-lg text-[#9B8EA6] transition-transform duration-300 group-hover:translate-x-1">
+                      ✦
                     </span>
-                    <span
-                      aria-hidden="true"
-                      className="text-[#9B8EA6] transition-all duration-300 group-hover:translate-x-1 group-hover:text-[#2D263B]"
+                    <span className="font-display text-lg">Catálogo de serviços</span>
+                  </span>
+                  <span className={`text-xs text-[#9B8EA6] transition-transform duration-300 ${openCatalogo ? "rotate-180" : ""}`}>
+                    ▼
+                  </span>
+                </button>
+
+                <AnimatePresence>
+                  {openCatalogo && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.3 }}
+                      className="overflow-hidden pl-6 flex flex-col gap-1 mt-1"
                     >
-                      →
+                      {/* Trabalhos */}
+                      <Link
+                        to="/trabalhos"
+                        onClick={onClose}
+                        className="flex items-center justify-between rounded-xl px-4 py-3 text-sm text-[#6B6378] hover:bg-[#F3EFEA] hover:text-[#2D263B]"
+                      >
+                        <span>Trabalhos</span>
+                        <span className="text-[#9B8EA6]">→</span>
+                      </Link>
+
+                      {/* Tiragens / Oráculos (Com subnível) */}
+                      <div>
+                        <button
+                          type="button"
+                          onClick={() => setOpenOraculos(!openOraculos)}
+                          className="flex items-center justify-between w-full rounded-xl px-4 py-3 text-sm text-[#6B6378] hover:bg-[#F3EFEA] hover:text-[#2D263B]"
+                        >
+                          <span>Tiragens/Oráculos</span>
+                          <span className={`text-xs text-[#9B8EA6] transition-transform duration-300 ${openOraculos ? "rotate-180" : ""}`}>
+                            ▼
+                          </span>
+                        </button>
+                        
+                        <AnimatePresence>
+                          {openOraculos && (
+                            <motion.div
+                              initial={{ height: 0, opacity: 0 }}
+                              animate={{ height: "auto", opacity: 1 }}
+                              exit={{ height: 0, opacity: 0 }}
+                              transition={{ duration: 0.2 }}
+                              className="overflow-hidden pl-4 flex flex-col gap-1 my-1"
+                            >
+                              <Link
+                                to="/oraculos/combos"
+                                onClick={onClose}
+                                className="flex items-center justify-between rounded-lg px-3 py-2 text-xs text-[#6B6378] hover:bg-[#F3EFEA] hover:text-[#2D263B]"
+                              >
+                                <span>Combos</span>
+                                <span className="text-[#9B8EA6]">→</span>
+                              </Link>
+                              <Link
+                                to="/oraculos/jogos-de-buzios"
+                                onClick={onClose}
+                                className="flex items-center justify-between rounded-lg px-3 py-2 text-xs text-[#6B6378] hover:bg-[#F3EFEA] hover:text-[#2D263B]"
+                              >
+                                <span>Jogos de Búzios</span>
+                                <span className="text-[#9B8EA6]">→</span>
+                              </Link>
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+                      </div>
+
+                      {/* Artigos religiosos (Com subnível) */}
+                      <div>
+                        <button
+                          type="button"
+                          onClick={() => setOpenArtigos(!openArtigos)}
+                          className="flex items-center justify-between w-full rounded-xl px-4 py-3 text-sm text-[#6B6378] hover:bg-[#F3EFEA] hover:text-[#2D263B]"
+                        >
+                          <span>Artigos religiosos</span>
+                          <span className={`text-xs text-[#9B8EA6] transition-transform duration-300 ${openArtigos ? "rotate-180" : ""}`}>
+                            ▼
+                          </span>
+                        </button>
+
+                        <AnimatePresence>
+                          {openArtigos && (
+                            <motion.div
+                              initial={{ height: 0, opacity: 0 }}
+                              animate={{ height: "auto", opacity: 1 }}
+                              exit={{ height: 0, opacity: 0 }}
+                              transition={{ duration: 0.2 }}
+                              className="overflow-hidden pl-4 flex flex-col gap-1 my-1"
+                            >
+                              <Link
+                                to="/artigos/guias"
+                                onClick={onClose}
+                                className="flex items-center justify-between rounded-lg px-3 py-2 text-xs text-[#6B6378] hover:bg-[#F3EFEA] hover:text-[#2D263B]"
+                              >
+                                <span>Guias</span>
+                                <span className="text-[#9B8EA6]">→</span>
+                              </Link>
+                              <Link
+                                to="/artigos/velas"
+                                onClick={onClose}
+                                className="flex items-center justify-between rounded-lg px-3 py-2 text-xs text-[#6B6378] hover:bg-[#F3EFEA] hover:text-[#2D263B]"
+                              >
+                                <span>Velas</span>
+                                <span className="text-[#9B8EA6]">→</span>
+                              </Link>
+                              <Link
+                                to="/artigos/colares-pulseiras"
+                                onClick={onClose}
+                                className="flex items-center justify-between rounded-lg px-3 py-2 text-xs text-[#6B6378] hover:bg-[#F3EFEA] hover:text-[#2D263B]"
+                              >
+                                <span>Colares/Pulseiras decorativas</span>
+                                <span className="text-[#9B8EA6]">→</span>
+                              </Link>
+                              <Link
+                                to="/artigos/brincos-e-outros"
+                                onClick={onClose}
+                                className="flex items-center justify-between rounded-lg px-3 py-2 text-xs text-[#6B6378] hover:bg-[#F3EFEA] hover:text-[#2D263B]"
+                              >
+                                <span>Brincos e outros</span>
+                                <span className="text-[#9B8EA6]">→</span>
+                              </Link>
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+
+              {/* Contato */}
+              <Link
+                to="/contato"
+                onClick={onClose}
+                className="group flex items-center justify-between rounded-2xl px-5 py-4 text-[#2D263B] transition-all duration-300 hover:bg-[#F3EFEA]"
+              >
+                <span className="flex items-center gap-4">
+                  <span className="text-lg text-[#9B8EA6] transition-transform duration-300 group-hover:translate-x-1">
+                    ☾
+                  </span>
+                  <span className="font-display text-lg">Contato</span>
+                </span>
+                <span className="text-[#9B8EA6] transition-all duration-300 group-hover:translate-x-1 group-hover:text-[#2D263B]">
+                  →
+                </span>
+              </Link>
+
+              {/* Área do cliente */}
+              <Link
+                to="/area-cliente"
+                onClick={onClose}
+                className="group flex items-center justify-between rounded-2xl px-5 py-4 text-[#2D263B] transition-all duration-300 hover:bg-[#F3EFEA]"
+              >
+                <span className="flex items-center gap-4">
+                  <span className="text-lg text-[#9B8EA6] transition-transform duration-300 group-hover:translate-x-1">
+                    🛡
+                  </span>
+                  <span className="font-display text-lg">Área do cliente</span>
+                </span>
+                <span className="text-[#9B8EA6] transition-all duration-300 group-hover:translate-x-1 group-hover:text-[#2D263B]">
+                  →
+                </span>
+              </Link>
+
+              {/* Divisor para separar termos e política */}
+              <div className="my-2 border-t border-[#EAE4F2]" />
+
+              {/* Termos de serviço e Política de privacidade */}
+              {bottomMenuItems.map((item) => (
+                <Link
+                  key={item.to}
+                  to={item.to}
+                  onClick={onClose}
+                  className="group flex items-center justify-between rounded-2xl px-5 py-4 text-[#2D263B] transition-all duration-300 hover:bg-[#F3EFEA]"
+                >
+                  <span className="flex items-center gap-4">
+                    <span className="text-lg text-[#9B8EA6] transition-transform duration-300 group-hover:translate-x-1">
+                      {item.symbol}
                     </span>
-                  </Link>
-                </motion.div>
+                    <span className="font-display text-lg">{item.label}</span>
+                  </span>
+                  <span
+                    aria-hidden="true"
+                    className="text-[#9B8EA6] transition-all duration-300 group-hover:translate-x-1 group-hover:text-[#2D263B]"
+                  >
+                    →
+                  </span>
+                </Link>
               ))}
             </nav>
 
