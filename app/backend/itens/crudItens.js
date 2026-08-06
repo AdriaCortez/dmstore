@@ -1,8 +1,7 @@
-import { Item } from "../banco-de-dados/itens";
-import { Imagem } from "../banco-de-dados/imagens";
+import { Item } from "../banco-de-dados/itens.js";
+import { Imagem } from "../banco-de-dados/imagens.js";
 import mongoose from "mongoose";
-
-export async function criarItem(req, res) {
+export async function cadastrarItem(req, res) {
     try {
         const { nome, preco, descricao, tipo } = req.body;
 
@@ -12,9 +11,9 @@ export async function criarItem(req, res) {
             })}
 
         const novoItem = await Item.create({
-            nome, 
+            nome,
+            preco,
             descricao,
-            checklist,
             tipo,
             criadoPor: req.userId,
             criadoEm: new Date(),

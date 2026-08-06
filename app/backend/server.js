@@ -1,6 +1,6 @@
 //aqui vai ficar o código do express
 import express from "express";
-import { autenicado,
+import { autenticado,
     admin } from "./middlewares/middlewares.js";
 import { 
     tokenEnviado, 

@@ -8,16 +8,13 @@ export const ImagemSchema = new Schema({
     url: {
         type: String,
         required: false,
+        default: "https://cdn1.staticpanvel.com.br/produtos/15/produto-sem-imagem.jpg",
     },
 
     caminho: {
         type: String,
-        required: false
-    },
-
-    default: {
-        url: "https://cdn1.staticpanvel.com.br/produtos/15/produto-sem-imagem.jpg",
-        caminho: "sem-imagem"
+        required: false,
+        default: "sem-imagem"
     }
 })
 

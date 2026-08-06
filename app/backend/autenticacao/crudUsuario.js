@@ -1,6 +1,6 @@
 //Tudo relacionado a criar, ler, atualizar e deletar usuarios
 
-import bcrypt from "bcryptjs";
+import bcrypt from "bcrypt";
 import { Usuario } from "../banco-de-dados/usuarios.js";
 
 export async function cadastrarUsuario(req, res) {

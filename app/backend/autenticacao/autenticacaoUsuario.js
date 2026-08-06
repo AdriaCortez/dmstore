@@ -1,7 +1,7 @@
 //tudo relacionado a autenticação e criptografia
 
 import jwt from "jsonwebtoken";
-import bcrypt from "bcryptjs";
+import bcrypt from "bcrypt";
 import { Usuario } from "../banco-de-dados/usuarios.js";
 import { Item } from "../banco-de-dados/itens.js";
 import { LimparCookies } from "../armazenamento/cookies.js";
@@ -83,7 +83,7 @@ export async function verificarLogin(req, res) {
             
     }
 
-async function mudarSenha(req, res) {
+export async function mudarSenha(req, res) {
   try {
 
         const { senhaAtual, novaSenha, confirmarSenha } = req.body;

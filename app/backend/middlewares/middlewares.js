@@ -5,10 +5,10 @@ import { token } from "../autenticacao/autenticacaoUsuario.js";
 import { Cookies } from "../armazenamento/cookies.js";
 import jwt from "jsonwebtoken";
 
-export function autenicado(req, res, next) {
-    const coookie = Cookies(req);
+export function autenticado(req, res, next) {
+    const cookie = Cookies(req);
 
-    if(!coookie) {
+    if(!cookie) {
         return res.status(401).json({
             error: "Acesso negado! Usuário não autenticado!"
             
