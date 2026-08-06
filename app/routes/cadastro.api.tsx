@@ -1,8 +1,7 @@
 //Arquivo voltado pra chamadas de api
 "use client";
 
-import { error } from "console";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router";
 import Cadastrar from "~/frontend/cadastrar";
 
@@ -64,6 +63,10 @@ export default function CadastroApi() {
         nome={nome}
         email={email}
         senha={senha}
+        setNome={setNome}
+        setEmail={setEmail}
+        setSenha={setSenha}
+
          />
     )
 }
