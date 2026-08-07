@@ -1,4 +1,4 @@
-// src/routes/AuthChoice.tsx
+
 import { Link } from "react-router";
 import { motion, useReducedMotion } from "framer-motion";
 
