@@ -1,0 +1,14 @@
+Aqui estão algumas coisas que precisam ser feitas ainda
+
+- fazer logout funcionar 
+- adicionar campo para adição, edição e remoção de itens para os admins da página
+- adicionar rota no back e no front de /carrinho para que o usuário possa adicionar um carrinho
+- adicionar página de trocar senha e modal pra deletar conta
+- adicionar local de "Sobre" na página
+- Criar função que permita que os usuários adicionem coisas aos carrinhos e isso persista (ou seja, o carrinho não é excluído após logout)
+- criar cálculo de frete
+- Criar função que permita que, ao clicar em "adquirir", no carrinho, o cliente vá diretamente pro wpp da bianca com um print 
+- Proteger rotas e melhorar criptografia pra evitar excesso de requisição e ataque xss
+- COnsertar o hook react dentro do const no meu .auth em ts no front
+
+Após tudo terminar, encontrar um domínio.

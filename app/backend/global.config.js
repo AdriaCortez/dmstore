@@ -22,7 +22,7 @@ export default function ConfiguracoesGlobais(app) {
                 "http://localhost" ],
                 
             credentials: true,
-            method: ["GET", "POST", "PUT", "DELETE", "PATCH"],
+            methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
             allowedHeaders: ["Content-Type", "Authorization"],
         })
     )

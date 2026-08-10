@@ -40,7 +40,7 @@ export async function tokenEnviado(req, res) {
 
 export async function logout(req, res) {
     try {
-        limparCookies(req, res);
+        LimparCookiesimparCookies(req, res);
         return res.json({ message: 'Logout realizado!'})
     } catch (error) {
         console.error("Erro ao realizar logout:", error);

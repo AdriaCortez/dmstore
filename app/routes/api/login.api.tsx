@@ -1,8 +1,7 @@
 //Arquivo voltado pra chamadas de api
 "use client";
 
-import type { iframe } from "framer-motion/client";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router";
 import Login from "~/frontend/login";
 
@@ -65,6 +64,8 @@ export default function LoginApi() {
         <Login 
         login={login}
         email={email}
-        senha={senha}/>
+        senha={senha}
+        setEmail={setEmail}
+        setSenha={setSenha}/>
     )
 }
