@@ -1,6 +1,8 @@
 As routes são as rotas da aplicação, o React router possui esse diretório para arquivos específicos que renderizam e aplicam lógica no 
 front end. 
 
+
+
 Como desenvolvedora, mantenho as chamadas de API aqui nas rotas para evitar confusão e manter o código limpo de diretórios inutilizados.
 Então o modelo de arquitetura continua sendo monolítica.
 

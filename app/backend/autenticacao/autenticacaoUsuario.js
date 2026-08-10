@@ -10,6 +10,11 @@ export const token = process.env.ACESS_TOKEN;
 
 export async function tokenEnviado(req, res) {
     try {
+        if(!req.userId) {
+            return res.status(401).json({
+                error: "Usuario não autenticado"
+            })
+        }
         const verificarUsuario = await Usuario.findById(req.userId).select("-senha");
 
         if(!verificarUsuario) {
@@ -19,6 +24,13 @@ export async function tokenEnviado(req, res) {
         }
 
         const verificarItens = await Item.find({ criadoPor: req.userId }).sort({ criadoEm: -1 });
+
+          if(!verificarItens) {
+            return res.status(404).json({
+                error: "Itens não encontrados!"
+            })
+        }
+
 
         res.json({ ...verificarUsuario.toObject(), itens: verificarItens }); // retorna os dados do usuário e os tens criados por ele
     } catch (error) {

@@ -4,7 +4,7 @@ import { Link } from "react-router";
 import { motion, useReducedMotion } from "framer-motion";
 
 export default function Cadastrar(props: any) {
-  const { cadastrar, nome, email, senha, setNome, setEmail, setSenha, login } = props;
+  const { cadastrar, nome, email, senha, setNome, setEmail, setSenha } = props;
   const prefersReducedMotion = useReducedMotion();
 
   const fadeUp = {
@@ -115,9 +115,8 @@ export default function Cadastrar(props: any) {
               </div>
 
               {/* Botão de Envio (Cadastrar) */}
-              <Link
+              <button
                 type="submit"
-                to="/cadastro"
                 className="group relative mt-2 inline-flex items-center justify-center rounded-full bg-[#2D263B] px-6 py-3.5 text-sm font-medium text-[#FBFBFA] shadow-sm transition-all duration-300 hover:bg-[#433A54] hover:shadow-md cursor-pointer"
               >
                 Cadastrar
@@ -127,7 +126,7 @@ export default function Cadastrar(props: any) {
                 >
                   →
                 </span>
-              </Link>
+              </button>
 
               {/* Botão de Login (conforme solicitado via prop ou Link alternativo) */}
               <Link

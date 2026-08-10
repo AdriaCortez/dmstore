@@ -17,7 +17,7 @@ export default function LoginApi() {
         e.preventDefault()
 
         try {
-            const ApiLogin = await fetch("http://localhost:4000/verificar-login", {
+            const ApiLogin = await fetch("http://localhost:4000/login", {
                 method: "POST",
                 headers: {"Content-Type": "application/json" },
                 credentials: "include",

@@ -1,5 +1,7 @@
 import type { Route } from "./+types/home";
 import { BemVindo } from "../frontend/boasVindas";
+import { useEffect, useState } from 'react';
+import { validarToken } from "./api/verificarAuth.api";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -9,5 +11,28 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export default function Home() {
-  return <BemVindo />;
+
+  const [usuario, setUsuario] = useState<any>(null)
+  const [carregando, setCarregando] = useState(true)
+
+  useEffect(() => {
+
+    const verificar = async () => {
+
+    console.log("Validando token...")
+
+    const dadosPassados = await validarToken();
+    setUsuario(dadosPassados);
+    setCarregando(false)
+    }
+
+    verificar()
+    
+  }, [])
+
+
+  return <BemVindo
+  
+  usuario={usuario}
+  carregando={carregando}/>;
 }

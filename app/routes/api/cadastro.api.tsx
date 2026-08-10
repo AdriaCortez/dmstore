@@ -19,7 +19,7 @@ export default function CadastroApi() {
             try {
                 const ApiCadastro = await fetch("http://localhost:4000/cadastro", {
                     method: "POST",
-                    headers: { "Content-type:": "application/json" },
+                    headers: { "Content-type": "application/json" },
                     credentials: "include",
                     body: JSON.stringify({
                         nome: nome,
@@ -30,15 +30,21 @@ export default function CadastroApi() {
 
                 const resposta = await ApiCadastro.json();
 
-                if(ApiCadastro.status === 201) {
+                if(ApiCadastro.status === 201 || ApiCadastro.status === 200) {
                     alert("Cadastro realizado, redirecionando para login")
 
                 navigate("/login")
                     
                 };
 
-                if(ApiCadastro.status === 400 || ApiCadastro.status === 409 ) {
+                if(ApiCadastro.status === 409 ) {
                     alert("Ops! Dados inválidos ou usuário existente. Tente novamente");
+
+                    console.log("Usuário já existe")
+                }
+
+                  if(ApiCadastro.status === 400 ) {
+                    alert("Falta de credenciais ou senha muito pequena.");
 
                     console.log("Usuário já existe")
                 }

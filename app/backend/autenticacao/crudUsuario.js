@@ -13,6 +13,12 @@ export async function cadastrarUsuario(req, res) {
             });
         }
 
+        if(typeof senha !== "string" || senha.length < 8) {
+            return res.status(400).json({
+                error: "A senha deve ter no mínimo 8 caracteres"
+            });
+        }
+
         const hash = await bcrypt.hash(senha, 8);
 
         const cadastro = await Usuario.create({
@@ -35,7 +41,7 @@ export async function cadastrarUsuario(req, res) {
             return res.status(400).json({ error: "BAD REQUEST - O servidor não entendeu a solicitação"})
         }
 
-        console.error("Erro ao cadastrar usuário:", error);
+        console.error("Erro ao cadastrar usuário:", err);
         return res.status(500).json({
             error: "Erro ao cadastrar usuário!"
         });

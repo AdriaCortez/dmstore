@@ -64,21 +64,21 @@ export default function Termos() {
           <div className="prose prose-neutral max-w-none text-[#6B6378] space-y-6 leading-relaxed">
             <div>
               <p className="font-display text-2xl text-[#2D263B] mb-1">Termos e Condições de Uso</p>
-              <p className="text-xs uppercase tracking-[0.2em] text-[#9B8EA6]">Última atualização: [inserir data]</p>
+              <p className="text-xs uppercase tracking-[0.2em] text-[#9B8EA6]">Última atualização: 10 de AGOSTO de 2026 </p>
             </div>
 
             <div className="space-y-6 pt-4 text-sm sm:text-base">
               <section>
                 <h3 className="font-display text-lg text-[#2D263B] mb-2">1. Aceitação dos Termos</h3>
                 <p>
-                  Ao acessar e utilizar esta aplicação (&quot;Aplicação&quot;, &quot;Serviço&quot;), você concorda integralmente com os presentes Termos e Condições de Uso (&quot;Termos&quot;). Caso não concorde com qualquer disposição aqui prevista, solicitamos que não utilize a Aplicação.
+                  Ao acessar e utilizar o serviço da web da loja D. Noite Store, você concorda integralmente com os presentes Termos e Condições de Uso (&quot;Termos&quot;). Durante a leitura, o usuário notará a utilização de "Aplicação" para descrever o serviço, esse termo é utilizado por razões técnicas.
                 </p>
               </section>
 
               <section>
                 <h3 className="font-display text-lg text-[#2D263B] mb-2">2. Descrição do Serviço</h3>
                 <p>
-                  A Aplicação permite que usuários criem uma conta, façam login e mantenham um carrinho de pedidos associado à sua conta para fins de conveniência e continuidade de uso. A Aplicação não realiza vendas, cobranças ou transações financeiras de qualquer natureza.
+                  A Aplicação permite que usuários criem uma conta, façam login e mantenham um carrinho de pedidos associado à sua conta para fins de organização. Esse site não realiza vendas automaticamente, cobranças ou transações financeiras de qualquer natureza. Os itens ofertados nessa aplicação são colocados manualmente pela admnistração, no entanto é necessário entrar em contato através de algum canal oficial disponibilizado para fazer calculos precisos e produtos personalizados
                 </p>
               </section>
 
@@ -156,21 +156,21 @@ export default function Termos() {
               <section>
                 <h3 className="font-display text-lg text-[#2D263B] mb-2">10. Encerramento de Conta</h3>
                 <p>
-                  O usuário pode solicitar o encerramento de sua conta e a exclusão de seus dados pessoais a qualquer momento, através do canal de contato disponibilizado pela Aplicação.
+                  O usuário pode solicitar o encerramento de sua conta e a exclusão de seus dados pessoais a qualquer momento, através do canal de contato do desenvolvedor disponibilizado ou através de seu perfil pessoal.
                 </p>
               </section>
 
               <section>
                 <h3 className="font-display text-lg text-[#2D263B] mb-2">11. Legislação Aplicável e Foro</h3>
                 <p>
-                  Estes Termos são regidos pelas leis da República Federativa do Brasil. Fica eleito o foro da comarca de [inserir cidade/estado] para dirimir quaisquer controvérsias oriundas destes Termos, com renúncia a qualquer outro, por mais privilegiado que seja.
+                  Estes Termos são regidos pelas leis da República Federativa do Brasil. Fica eleito o foro da comarca de qualquer região em território brasileiro para dirimir quaisquer controvérsias oriundas destes Termos, com renúncia a qualquer outro, por mais privilegiado que seja.
                 </p>
               </section>
 
               <section>
                 <h3 className="font-display text-lg text-[#2D263B] mb-2">12. Contato</h3>
                 <p>
-                  Em caso de dúvidas sobre estes Termos ou sobre o tratamento de dados pessoais, entre em contato através de: [inserir e-mail/canal de contato].
+                  Em caso de dúvidas sobre estes Termos ou sobre o tratamento de dados pessoais, entre em contato através dos canais de contato disponibilizados na página inicial.
                 </p>
               </section>
             </div>

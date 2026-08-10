@@ -64,7 +64,7 @@ export default function PoliticaPrivacidade() {
           <div className="prose prose-neutral max-w-none text-[#6B6378] space-y-6 leading-relaxed">
             <div>
               <p className="font-display text-2xl text-[#2D263B] mb-1">Política de Privacidade</p>
-              <p className="text-xs uppercase tracking-[0.2em] text-[#9B8EA6]">Última atualização: [inserir data]</p>
+              <p className="text-xs uppercase tracking-[0.2em] text-[#9B8EA6]">Última atualização: 10 de AGOSTO de 2026</p>
             </div>
 
             <div className="space-y-6 pt-4 text-sm sm:text-base">
@@ -161,7 +161,7 @@ export default function PoliticaPrivacidade() {
               <section>
                 <h3 className="font-display text-lg text-[#2D263B] mb-2">11. Contato</h3>
                 <p>
-                  Esta Aplicação não possui uma equipe de atendimento formal. O contato com os responsáveis pelo site é feito diretamente através de suas redes sociais: [inserir @ ou link das redes sociais].
+                  Esta Aplicação não possui uma equipe de atendimento formal. O contato com os responsáveis pelo site é feito diretamente através de suas redes sociais disponibilizadas na página inicial.
                 </p>
               </section>
 

@@ -3,7 +3,12 @@ import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 
-export function BemVindo() {
+interface BemVindoProps {
+  usuario?: any;
+  carregando?: boolean;
+}
+
+export function BemVindo({ usuario, carregando }: BemVindoProps) {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const prefersReducedMotion = useReducedMotion();
 
@@ -41,18 +46,24 @@ export function BemVindo() {
         </motion.div>
 
         <motion.div {...fadeUp} transition={{ ...fadeUp.transition, delay: 0.05 }}>
-          <Link
-            to="/entrar"
-            className="group relative inline-flex items-center gap-2.5 rounded-full border border-[#EAE4F2] bg-white/70 px-5 py-2.5 text-sm font-medium text-[#2D263B] shadow-sm backdrop-blur-md transition-all duration-300 hover:border-[#D5CBE5] hover:bg-white hover:shadow-md"
-          >
-            Entrar ou cadastrar
-            <span
-              aria-hidden="true"
-              className="text-[#9B8EA6] transition-transform duration-300 group-hover:translate-x-1 group-hover:text-[#2D263B]"
+          {carregando ? (
+            <div className="h-10 w-28 animate-pulse rounded-full bg-[#EAE4F2]/60" />
+          ) : usuario ? (
+            <UserMenu usuario={usuario} />
+          ) : (
+            <Link
+              to="/entrar"
+              className="group relative inline-flex items-center gap-2.5 rounded-full border border-[#EAE4F2] bg-white/70 px-5 py-2.5 text-sm font-medium text-[#2D263B] shadow-sm backdrop-blur-md transition-all duration-300 hover:border-[#D5CBE5] hover:bg-white hover:shadow-md"
             >
-              →
-            </span>
-          </Link>
+              Entrar ou cadastrar
+              <span
+                aria-hidden="true"
+                className="text-[#9B8EA6] transition-transform duration-300 group-hover:translate-x-1 group-hover:text-[#2D263B]"
+              >
+                →
+              </span>
+            </Link>
+          )}
         </motion.div>
       </header>
 
@@ -111,6 +122,65 @@ export function BemVindo() {
       <Footer />
 
       <SideDrawer open={isDrawerOpen} onClose={() => setIsDrawerOpen(false)} />
+    </div>
+  );
+}
+
+function UserMenu({ usuario }: { usuario: any }) {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleSair = async () => {
+    try {
+      await fetch("http://localhost:4000/logout", {
+        credentials: "include",
+        method: "POST",
+      });
+      window.location.reload();
+    } catch (error) {
+      console.error("Erro ao sair", error);
+    }
+  };
+
+  return (
+    <div 
+      className="relative"
+      onMouseEnter={() => setIsOpen(true)}
+      onMouseLeave={() => setIsOpen(false)}
+    >
+      <button
+        type="button"
+        className="group relative inline-flex items-center gap-2.5 rounded-full border border-[#EAE4F2] bg-white/70 px-5 py-2.5 text-sm font-medium text-[#2D263B] shadow-sm backdrop-blur-md transition-all duration-300 hover:border-[#D5CBE5] hover:bg-white hover:shadow-md"
+      >
+        <span className="h-2 w-2 rounded-full bg-emerald-500"></span>
+        {usuario?.nome || "Minha Conta"}
+        <span className="text-[#9B8EA6] text-xs transition-transform duration-300">▼</span>
+      </button>
+
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: 8, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 8, scale: 0.95 }}
+            transition={{ duration: 0.2 }}
+            className="absolute right-0 mt-2 w-52 origin-top-right rounded-2xl border border-[#EAE4F2] bg-white p-2 shadow-xl backdrop-blur-md z-50"
+          >
+            <Link
+              to="/configuracoes"
+              className="flex w-full items-center rounded-xl px-4 py-2.5 text-xs font-medium text-[#6B6378] transition-colors hover:bg-[#F3EFEA] hover:text-[#2D263B]"
+            >
+              Configurações da conta
+            </Link>
+            <button
+              type="button"
+              onClick={handleSair}
+              className="flex w-full items-center rounded-xl px-4 py-2.5 text-xs font-medium text-rose-600 transition-colors hover:bg-rose-50"
+            >
+              Sair
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
@@ -414,7 +484,6 @@ function SideDrawer({ open, onClose }: SideDrawerProps) {
             </div>
 
             <nav className="flex flex-col gap-1.5 px-4 py-8">
-              {/* Catálogo de Serviços com Acordeão */}
               <div className="flex flex-col">
                 <button
                   type="button"
@@ -441,7 +510,6 @@ function SideDrawer({ open, onClose }: SideDrawerProps) {
                       transition={{ duration: 0.3 }}
                       className="overflow-hidden pl-6 flex flex-col gap-1 mt-1"
                     >
-                      {/* Trabalhos */}
                       <Link
                         to="/trabalhos"
                         onClick={onClose}
@@ -451,7 +519,6 @@ function SideDrawer({ open, onClose }: SideDrawerProps) {
                         <span className="text-[#9B8EA6]">→</span>
                       </Link>
 
-                      {/* Tiragens / Oráculos (Com subnível) */}
                       <div>
                         <button
                           type="button"
@@ -494,7 +561,6 @@ function SideDrawer({ open, onClose }: SideDrawerProps) {
                         </AnimatePresence>
                       </div>
 
-                      {/* Artigos religiosos (Com subnível) */}
                       <div>
                         <button
                           type="button"
@@ -557,7 +623,6 @@ function SideDrawer({ open, onClose }: SideDrawerProps) {
                 </AnimatePresence>
               </div>
 
-              {/* Contato */}
               <Link
                 to="/contato"
                 onClick={onClose}
@@ -574,7 +639,6 @@ function SideDrawer({ open, onClose }: SideDrawerProps) {
                 </span>
               </Link>
 
-              {/* Área do cliente */}
               <Link
                 to="/area-cliente"
                 onClick={onClose}
@@ -591,10 +655,8 @@ function SideDrawer({ open, onClose }: SideDrawerProps) {
                 </span>
               </Link>
 
-              {/* Divisor para separar termos e política */}
               <div className="my-2 border-t border-[#EAE4F2]" />
 
-              {/* Termos de serviço e Política de privacidade */}
               {bottomMenuItems.map((item) => (
                 <Link
                   key={item.to}
@@ -625,10 +687,10 @@ function SideDrawer({ open, onClose }: SideDrawerProps) {
               className="mt-auto border-t border-[#EAE4F2] px-8 py-6"
             >
               <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[#9B8EA6]">
-                ✦ Feito com calma
+                ✦ A loja está em atualização
               </p>
               <p className="mt-1 text-sm text-[#6B6378]">
-                e um pouco de magia.
+                Contate-nos em caso de dúvidas
               </p>
             </motion.div>
           </motion.aside>

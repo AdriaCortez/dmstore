@@ -24,10 +24,7 @@ const userSchema = new mongoose.Schema({
     senha: {
         type: String,
         required: true,
-        minlength: {
-            value: 8,
-            message: 'A senha deve ter no mínimo 8 caracteres'
-        }
+        minlength: [8, 'A senha deve ter no mínimo 8 caracteres']
     },
 
     admin: {
