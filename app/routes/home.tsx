@@ -2,6 +2,7 @@ import type { Route } from "./+types/home";
 import { BemVindo } from "../frontend/boasVindas";
 import { useEffect, useState } from 'react';
 import { validarToken } from "./api/verificarAuth.api";
+import { useNavigate } from "react-router";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -14,6 +15,8 @@ export default function Home() {
 
   const [usuario, setUsuario] = useState<any>(null)
   const [carregando, setCarregando] = useState(true)
+
+  const navegar = useNavigate()
 
   useEffect(() => {
 

@@ -1,8 +1,5 @@
 //função que verifica autenticação de usuário via fetch
 
-import { useNavigate } from "react-router"
-
-
 export const validarToken  = async () => {
     console.log("Verificando se há algum usuário sendo passado")
 
@@ -30,9 +27,9 @@ export const validarToken  = async () => {
     }
 }
 
-export const validarTokenObrigatorio  = async () => {
+export const validarTokenObrigatorio  = async (navegar: any) => {
     
-    const navegar = useNavigate();
+   
     console.log("Verificando se há algum usuário sendo passado")
 
     try {
@@ -52,6 +49,8 @@ export const validarTokenObrigatorio  = async () => {
 
         const validado = await validar.json()
         console.log("O usuário existe e foi validado")
+
+        return validado;
 
 
     } catch (error) {
