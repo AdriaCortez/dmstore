@@ -15,6 +15,11 @@ import {
     deletarItem,
     adicionarImagemAoItem,
     editarItem } from "./itens/crudItens.js";
+
+import { 
+    adicionarItem,
+    buscarCarrinho } from "./itens/carrinho.js";
+
 import ConfiguracoesGlobais from "./global.config.js";
 
 const app = express();
@@ -25,6 +30,15 @@ ConfiguracoesGlobais(app);
 app.get("/token", autenticado, async (req, res) => {
     try {
         return tokenEnviado(req, res);
+    } catch (error) {
+        console.error("Erro ao enviar token:", error);
+        return res.status(500).json({ error: "Erro interno do servidor" });
+    }
+});
+
+app.get("/buscar-carrinho", autenticado, async (req, res) => {
+    try {
+        return buscarCarrinho(req, res);
     } catch (error) {
         console.error("Erro ao enviar token:", error);
         return res.status(500).json({ error: "Erro interno do servidor" });
@@ -48,6 +62,17 @@ app.post("/login", async (req, res) => {
         return res.status(500).json({ error: "Erro interno do servidor" });
     }
 });
+
+
+app.post("/adicionar-item", autenticado, async (req, res) => {
+    try {
+        return adicionarItem(req, res);
+    } catch (error) {
+    
+        return res.status(500).json({ error: "Erro interno do servidor" });
+    }
+});
+
 
 app.post("/logout", autenticado, async (req, res) => {
     try {
